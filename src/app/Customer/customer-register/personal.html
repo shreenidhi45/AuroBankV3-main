@@ -1,0 +1,139 @@
+<section class="h-100 bg-dark">
+  <div class="container py-5 h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col">
+        <div class="card card-registration my-4">
+          <div class="row g-0">
+            <div class="col-xl-6 d-none d-xl-block">
+              <img
+                src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-registration/img4.webp"
+                alt="Sample photo"
+                class="img-fluid"
+                style="
+                  border-top-left-radius: 0.25rem;
+                  border-bottom-left-radius: 0.25rem;
+                "
+              />
+            </div>
+            <ngb-alert *ngIf="responceRegisteration"
+              >User Alredy exist
+              <button type="button" class="btn btn-success" (click)="reset()">
+                Clear
+              </button>
+            </ngb-alert>
+            <div class="col-xl-6">
+              <div class="card-body p-md-5 text-black">
+                <h3 class="mb-5 text-uppercase">Customer registration form</h3>
+                <form
+                  [formGroup]="customerRegisterForm"
+                  (ngSubmit)="submitData(customerRegisterForm.value)"
+                >
+                  <div class="form-outline mb-4">
+                    <span
+                      *ngIf="firstNameValidator && firstNameValidator.invalid && firstNameValidator.touched"
+                      style="color: red;"
+                      >required FirstName</span
+                    >
+                    <input
+                      type="text"
+                      id="form3Example97"
+                      class="form-control form-control-lg"
+                      formControlName="firstName"
+                    />
+                    <label class="form-label" for="form3Example97"
+                      >First Name</label
+                    >
+                  </div>
+                  <div class="form-outline mb-4">
+                    <span
+                      *ngIf="lastNameValidator && lastNameValidator.invalid && lastNameValidator.touched"
+                      style="color: red;"
+                      >required LastName</span
+                    >
+                    <input
+                      type="text"
+                      id="form3Example97"
+                      class="form-control form-control-lg"
+                      formControlName="lastName"
+                    />
+                    <label class="form-label" for="form3Example97"
+                      >Last Name</label
+                    >
+                  </div>
+
+                  <div class="row">
+                    <div class="col-md-6 mb-4">
+                      <label for="gender" class="form-label">Gender:</label>
+                      <select class="form-select">
+                        <option value="1">Select Gender</option>
+                        <option value="2">Male</option>
+                        <option value="3">Female</option>
+                        <option value="4">Other</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  <div class="form-outline mb-4">
+                    <span
+                      *ngIf="dobValidator && dobValidator.invalid && dobValidator.touched"
+                      style="color: red;"
+                      >required Date-of-Birth</span
+                    >
+                    <input
+                      type="date"
+                      class="form-control form-control-lg"
+                      formControlName="DOB"
+                    />
+                    <label class="form-label" for="form3Example9">DOB</label>
+                  </div>
+
+                  <div class="form-outline mb-4">
+                    <span
+                      *ngIf="emailValidator && emailValidator.invalid && emailValidator.touched"
+                      style="color: red;"
+                      >required Email</span
+                    >
+                    <input
+                      type="email"
+                      class="form-control form-control-lg"
+                      formControlName="email"
+                    />
+                    <label class="form-label" for="form3Example97"
+                      >Email ID</label
+                    >
+                  </div>
+
+                  <div class="form-outline mb-4">
+                    <span
+                      *ngIf="userValidator && userValidator.invalid && userValidator.touched"
+                      style="color: red;"
+                      >required User ID</span
+                    >
+                    <input
+                      type="number"
+                      class="form-control form-control-lg"
+                      formControlName="userId"
+                    />
+                    <label class="form-label" for="form3Example97"
+                      >USER ID</label
+                    >
+                  </div>
+
+                  <div class="d-flex justify-content-end pt-3">
+                    <button
+                      type="submit"
+                      class="btn btn-warning btn-lg ms-2"
+                      [disabled]="customerRegisterForm.invalid"
+                    >
+                      Submit form
+                    </button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

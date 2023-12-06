@@ -1,0 +1,88 @@
+<!-- passbook.component.html -->
+<div class="container mt-4 bg-primary" *ngIf="showPassbook">
+  <div class="row">
+    <!-- Left Column with Image -->
+    <div class="col-md-4 mt-5" style="height: fit-content;">
+      <img
+        src="../../../assets/avtar.png"
+        class="img-fluid"
+        alt="Customer Image"
+      />
+    </div>
+
+    <!-- Right Column with Passbook Details -->
+    <div class="col-md-8">
+      <h2>Passbook Details</h2>
+      <div class="mb-3">
+        <label class="form-label">Customer ID:</label>
+        <input
+          type="text"
+          class="form-control"
+          value="{{ passbook.customerId }}"
+          readonly
+        />
+      </div>
+      <div class="mb-3">
+        <label class="form-label">First Name:</label>
+        <input
+          type="text"
+          class="form-control"
+          value="{{ passbook.firstName }}"
+          readonly
+        />
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Last Name:</label>
+        <input
+          type="text"
+          class="form-control"
+          value="{{ passbook.lastName }}"
+          readonly
+        />
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Email:</label>
+        <input
+          type="email"
+          class="form-control"
+          value="{{ passbook.email }}"
+          readonly
+        />
+      </div>
+
+      <!-- Display Accounts -->
+      <div *ngFor="let account of passbook.accounts" class="mb-3">
+        <h4>Account {{ account.accountNumber }}</h4>
+        <div class="mb-2">
+          <label class="form-label">Account Type:</label>
+          <input
+            type="text"
+            class="form-control"
+            value="{{ account.accountType }}"
+            readonly
+          />
+        </div>
+        <div class="mb-2">
+          <label class="form-label">Opening Date:</label>
+          <input
+            type="text"
+            class="form-control"
+            value="{{ account.openningDate | date:'medium' }}"
+            readonly
+          />
+        </div>
+        <div class="mb-2">
+          <label class="form-label">Account Balance:</label>
+          <input
+            type="text"
+            class="form-control"
+            value="{{ account.accountBalance | currency }}"
+            readonly
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-two-date-filter></app-two-date-filter>

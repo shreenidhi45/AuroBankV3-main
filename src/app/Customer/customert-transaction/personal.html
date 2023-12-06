@@ -1,0 +1,291 @@
+<div *ngIf="showvalidAccount">
+  <div
+    class="container mt-4 d-flex justify-content-center align-items-center"
+    style="height: 100vh;"
+  >
+    <ngb-alert class="bg-danger text-white" style="opacity: 0.9;">
+      <h1>Invalid Account Number</h1>
+      <button class="btn btn-light" (click)="refreshFun()">Try Again</button>
+    </ngb-alert>
+  </div>
+</div>
+
+<div class="container mt-4">
+  <div class="row justify-content-center">
+    <!-- Left Column with Cards -->
+    <div class="col-md-6">
+      <div class="card mb-3" style="max-width: 18rem;" (click)="cardDeposiet()">
+        <img
+          src="assets/deposite.jpg"
+          class="card-img-top"
+          alt="Deposite"
+          width="150"
+          height="150"
+        />
+        <div class="card-body">
+          <p class="card-text"></p>
+        </div>
+      </div>
+      <div class="card mb-3" style="max-width: 18rem;" (click)="cardWithdraw()">
+        <img
+          src="assets/withdraw.jpg"
+          class="card-img-top"
+          alt="Withdraw"
+          width="150"
+          height="150"
+        />
+        <div class="card-body">
+          <p class="card-text"></p>
+        </div>
+      </div>
+      <div class="card mb-3" style="max-width: 18rem;" (click)="cardTransfer()">
+        <img
+          src="assets/transfer.jpg"
+          class="card-img-top"
+          alt="Transfer"
+          width="150"
+          height="150"
+        />
+        <div class="card-body">
+          <p class="card-text"></p>
+        </div>
+      </div>
+    </div>
+    <!-- Right Column with Form -->
+    <div class="col-md-6" *ngIf="transferShow">
+      <h1 class="orange-heading">MONEY TRANSFER</h1>
+      <form
+        [formGroup]="transferForm"
+        (ngSubmit)="onSubmitTransfer(transferForm.value)"
+      >
+        <div class="form-group">
+          <label for="exampleInputAccountNumber">Account Number</label>
+          <input
+            type="number"
+            class="form-control"
+            formControlName="accountNumber"
+            placeholder="{{accountNumber}}"
+            [(ngModel)]="accountNumber"
+            readonly
+          />
+          <div
+            *ngIf="tAccountNumberValidator && tAccountNumberValidator.invalid && tAccountNumberValidator.touched"
+            class="text-danger"
+          >
+            Account Number is required.
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="exampleInputAccountNumber">Recievers Account Number</label>
+          <input
+            type="number"
+            class="form-control"
+            formControlName="targetAccountNumber"
+            placeholder="Enter Recievers Account Number"
+          />
+          <div
+            *ngIf="targetAccountNumberValidator && targetAccountNumberValidator.invalid && targetAccountNumberValidator.touched"
+            class="text-danger"
+          >
+            Recievers Account Number is required.
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="amount">Amount</label>
+          <input
+            type="number"
+            class="form-control"
+            formControlName="amount"
+            placeholder="Enter Amount"
+            required
+          />
+          <div
+            *ngIf=" tAmountValidator  && tAmountValidator.invalid && tAmountValidator.touched"
+            class="text-danger"
+          >
+            Enter the amount greater than zero
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="exampleInputDescription">Description</label>
+          <textarea
+            class="form-control"
+            formControlName="description"
+            rows="3"
+            placeholder="Enter Description"
+          ></textarea>
+          <div
+            *ngIf="tDescriptionValidator && tDescriptionValidator.invalid && tDescriptionValidator.touched"
+            class="text-danger"
+          >
+            Please enter a valid description.
+          </div>
+        </div>
+        <button
+          type="submit"
+          class="btn btn-primary"
+          [disabled]="transferForm.invalid"
+        >
+          Submit
+        </button>
+      </form>
+
+      <!-- Deposite    -->
+    </div>
+    <div class="col-md-6" *ngIf="depositeShow">
+      <form
+        [formGroup]="depositeForm"
+        (ngSubmit)="onSubmitDeposite(depositeForm.value)"
+      >
+        <div class="form-group">
+          <br />
+          <h1 class="orange-heading">MONEY DEPOSIT</h1>
+          <label for="exampleInputAccountNumber">Account Number</label>
+          <input
+          type="number"
+          class="form-control"
+          formControlName="accountId"
+          placeholder="{{accountNumber}}"
+          [(ngModel)]="accountNumber"
+          readonly
+          />
+          <div
+            *ngIf="accountNumberValidator && accountNumberValidator.invalid && accountNumberValidator.touched"
+            class="text-danger"
+          >
+            Account Number is required.
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="transactionType">Transaction Type</label>
+          <select class="form-control" formControlName="transactionType">
+            <option value="Deposit">Deposit</option>
+          </select>
+          <div
+            *ngIf="transactionTypeValidator   &&  transactionTypeValidator.invalid && transactionTypeValidator.touched"
+            class="text-danger"
+          >
+            Transaction Type is required.
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="amount">Amount</label>
+          <input
+          type="number"
+          class="form-control"
+          formControlName="transactionAmount"
+          placeholder="Enter Amount"
+          required
+          />
+          <div
+            *ngIf=" amountValidator  && amountValidator.invalid && amountValidator.touched"
+            class="text-danger"
+          >
+            Enter Amount Greater Than Zero
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="exampleInputDescription">Description</label>
+          <textarea
+            class="form-control"
+            formControlName="description"
+            rows="3"
+            placeholder="Enter Description"
+          ></textarea>
+          <div
+            *ngIf="descriptionValidator && descriptionValidator.invalid && descriptionValidator.touched"
+            class="text-danger"
+          >
+            Please enter a valid description.
+          </div>
+        </div>
+        <button
+          type="submit"
+          class="btn btn-primary"
+          [disabled]="depositeForm.invalid"
+        >
+          Submit
+        </button>
+      </form>
+    </div>
+
+    <!-- withdraw    -->
+
+    <div class="col-md-6" *ngIf="withdrawShow">
+      <br />
+      <h1 class="orange-heading">WITHDRAW MONEY</h1>
+      <form
+        [formGroup]="withdrawForm"
+        (ngSubmit)="onSubmitWithdraw(withdrawForm.value)"
+      >
+        <div class="form-group">
+          <label for="exampleInputAccountNumber">Account Number</label>
+          <input
+          type="number"
+          class="form-control"
+          formControlName="accountId"
+          placeholder="{{accountNumber}}"
+          [(ngModel)]="accountNumber"
+          readonly
+          />
+          <div
+            *ngIf="waccountNumberValidator && waccountNumberValidator.invalid && waccountNumberValidator.touched"
+            class="text-danger"
+          >
+            Account Number is required.
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="transactionType">Transaction Type</label>
+          <select class="form-control" formControlName="transactionType">
+            <option value="Withdraw">Withdraw</option>
+          </select>
+          <div
+            *ngIf="wtransactionTypeValidator   &&  wtransactionTypeValidator .invalid && wtransactionTypeValidator .touched"
+            class="text-danger"
+          >
+            Transaction Type is required.
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="amount">Amount</label>
+          <input
+            type="number"
+            class="form-control"
+            formControlName="transactionAmount"
+            placeholder="Enter Amount"
+            required
+          />
+          <div
+            *ngIf=" wamountValidator  && wamountValidator.invalid && wamountValidator.touched"
+            class="text-danger"
+          >
+            Amount is required and must be greater than or equal to 0.
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="exampleInputDescription">Description</label>
+          <textarea
+            class="form-control"
+            formControlName="description"
+            rows="3"
+            placeholder="Enter Description"
+          ></textarea>
+          <div
+            *ngIf="wdescriptionValidator && wdescriptionValidator.invalid && wdescriptionValidator.touched"
+            class="text-danger"
+          >
+            Please enter a valid description.
+          </div>
+        </div>
+        <button
+          type="submit"
+          class="btn btn-primary"
+          [disabled]="withdrawForm.invalid"
+        >
+          Submit
+        </button>
+      </form>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,68 @@
+
+<div *ngIf="showfetchError" class="mt-3">
+    <ngb-alert [type]="'danger'">
+      <h4 class="alert-heading">Sorry, No Account Found</h4>
+      <p class="mb-0">Please verify the information and try again.</p>
+      <button class="btn btn-danger" (click)="refreshfun()">Try Again</button>
+    </ngb-alert>
+  </div>
+  
+  <div class="container mt-5">
+    <div class="col-md-5">
+    <form [formGroup]="balanceForm" (ngSubmit)="onSubmit(balanceForm.value)">
+      <div class="form-group">
+        <label for="accountType">Select Account Number:</label>
+        <select formControlName="accountId" class="form-control">
+          <option *ngFor="let item of accountStorage" [value]="item.accountNumber">{{ item.accountNumber }}</option>
+        </select>
+        <div *ngIf="tAccountNumberValidator && tAccountNumberValidator.invalid && tAccountNumberValidator.touched" class="text-danger">
+          Account Number is required.
+        </div>
+      </div>
+      <button type="submit" class="btn btn-primary" [disabled]="balanceForm.invalid">Submit</button>
+    </form>
+  </div>
+    <div class="row mt-3">
+      <div class="col-md-6" *ngIf="fetch">
+        <div class="card border-primary mb-3">
+          <div class="card-body">
+            <h5 class="card-title">Customer Details</h5>
+            <p class="card-text">Customer ID: {{ fetch.customer.customerId }}</p>
+            <p class="card-text">Full Name: {{ fetch.customer.firstName }} {{ fetch.customer.lastName }}</p>
+            <p class="card-text">Email: {{ fetch.customer.email }}</p>
+            <p class="card-text">Gender: {{ fetch.customer.gender }}</p>
+            <p class="card-text">Contact Details: {{ fetch.customer.contactDetails }}</p>
+            <p class="card-text">State: {{ fetch.customer.state }}</p>
+          </div>
+        </div>
+      </div>
+  
+      <div class="col-md-6" *ngIf="fetch">
+        <div class="card border-primary mb-3">
+          <div class="card-body">
+            <h5 class="card-title">Account Details</h5>
+            <p class="card-text">Account Number: {{ fetch.accountNumber }}</p>
+            <p class="card-text">Account Type: {{ fetch.accountType }}</p>
+            <p class="card-text">Opening Date: {{ fetch.openningDate }}</p>
+            <p class="card-text">Account Balance: {{ fetch.accountBalance }}</p>
+            <p class="card-text">Interest Rate: {{ fetch.intrestRate }}</p>
+          </div>
+        </div>
+      </div>
+  
+  
+  
+      <div class="col-md-6" *ngIf="fetch">
+        <div class="card border-primary mb-3">
+          <div class="card-body">
+            <h5 class="card-title">FD Account Details</h5>
+            <p class="card-text">Account Number: {{ fetch.fdAccountId }}</p>
+            <p class="card-text">Account Type: {{ fetch.accountType }}</p>
+            <p class="card-text">Opening Date: {{ fetch.openningDate }}</p>
+            <p class="card-text">Account Balance: {{ fetch.accountBalance }}</p>
+            <p class="card-text">Interest Rate: {{ fetch.intrestRate }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

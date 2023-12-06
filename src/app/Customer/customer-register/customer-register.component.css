@@ -1,0 +1,23 @@
+.card-registration .select-input.form-control[readonly]:not([disabled]) {
+    font-size: 1rem;
+    line-height: 2.15;
+    padding-left: .75em;
+    padding-right: .75em;
+    }
+    .card-registration .select-arrow {
+    top: 13px;
+    }
+
+    .form-control:hover {
+        border-color: orange;
+      }
+
+      /* Add your custom styles here */
+.form-label {
+  display: block; /* Display label as block to place it on top of the input */
+  margin-bottom: 5px; /* Add some space between label and input */
+}
+
+.form-control {
+  width: 300px; /* Adjust the width of the input boxes as needed */
+}

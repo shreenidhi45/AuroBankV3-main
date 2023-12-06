@@ -1,0 +1,52 @@
+<!-- FD Calculator -->
+       
+<div class="row"> 
+  <div class="col-sm-6"> 
+    <div class="card"> 
+      <div class="card-body"> 
+        <form [formGroup]="fdForm">
+
+          <!-- Slider for Amount -->
+          <div class="mb-3">
+            <label for="amountRange" class="form-label">Principal Amount</label>
+            <input type="number" class="form-control mb-2" formControlName="amount">
+          
+          </div>
+
+          <!-- Slider for Number of Years -->
+          <div class="mb-3">
+            <label for="yearsRange" class="form-label">Period(In Years)</label>
+            <input type="number" class="form-control mb-2" formControlName="years">
+           
+          </div>
+
+          <!-- Slider for Rate of Interest (ROI) -->
+          <div class="mb-3">
+            <label for="roiRange" class="form-label">Interest Rate %</label>
+            <input type="number" class="form-control mb-2" formControlName="roi">
+           
+          </div>
+        </form>
+      </div> 
+    </div> 
+  </div> 
+  <div class="col-sm-6"> 
+    <div class="card"> 
+      <div class="card-body"> 
+        <div class="mt-4 d-flex justify-content-between">
+          <p>Principal Amount:</p>
+          <p><span style="font-weight: bold;">{{ fdForm.get('amount')?.value | currency:'INR' }}</span></p>
+        </div>
+        <div class="d-flex justify-content-between">
+          <p>Estimated Returns:</p>
+          <p><span style="font-weight: bold;">{{ estimatedReturns | currency:'INR' }}</span></p>
+        </div>
+        <div class="d-flex justify-content-between">
+          <p>Total Value:</p>
+          <p><span style="font-weight: bold;">{{ finalAmount | currency:'INR' }}</span></p>
+        </div>
+      </div> 
+    </div> 
+  
+</div>
+</div>

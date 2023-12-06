@@ -1,0 +1,61 @@
+<div class="container d-flex justify-content-center align-items-center vh-100">
+    <div class="card bg-glass" style="width: 400px;">
+      <div class="card-body px-4 py-5 px-md-5">
+  
+        <form [formGroup]="registerForm" (ngSubmit)="submitData(registerForm.value)" novalidate>
+  
+          <div class="mb-4">
+            <label class="form-label">Admin Name</label>
+            <input type="text" class="form-control" formControlName="UserName" placeholder="Enter Admin Name" />
+            <span *ngIf="userValidator && userValidator.invalid && userValidator.touched" style="color: red;">
+              Required Admin Name
+            </span>
+          </div>
+  
+          <div class="mb-4">
+            <label class="form-label">Email address</label>
+            <input type="email" class="form-control" placeholder="Enter Your Email address" formControlName="email" />
+            <span *ngIf="emailValidator && emailValidator.invalid && emailValidator.touched" style="color: red;">
+              Required Email
+            </span>
+          </div>
+  
+          <div class="mb-4">
+            <label class="form-label">Password</label>
+            <input type="password" class="form-control" placeholder="Enter Your Password" formControlName="Password" />
+            <span *ngIf="passwordValidator && passwordValidator.invalid && passwordValidator.touched" style="color: red;">
+              Required Password
+            </span>
+            <span *ngIf="passwordValidator && passwordValidator.invalid && passwordValidator.touched" style="color: red;">
+              Minimum Length 6
+            </span>
+          </div>
+  
+          <div class="mb-4">
+            <label class="form-label">Confirm Password</label>
+            <input type="password" class="form-control" placeholder="Confirm Your Password" formControlName="ConfirmPassword" />
+            <span *ngIf="confirmValidator && confirmValidator.invalid && confirmValidator.touched" style="color: red;">
+              Required Password
+            </span>
+            <span *ngIf="registerForm.errors?.['PasswordMatchError'] && confirmValidator && confirmValidator.touched"
+              style="color: red;">Password should match</span>
+          </div>
+  
+          <div class="mb-4">
+            <label class="form-label" hidden>Role Id</label>
+            <input type="number" class="form-control" placeholder="Enter Your Role Id" formControlName="roleId" hidden />
+            <span *ngIf="roleValidator && roleValidator.invalid && roleValidator.touched" style="color: red;">
+              Required Role Id
+            </span>
+          </div>
+  
+          <button type="submit" class="btn btn-primary btn-block" [disabled]="registerForm.invalid">
+            Sign up
+          </button>
+  
+        </form>
+  
+      </div>
+    </div>
+  </div>
+  

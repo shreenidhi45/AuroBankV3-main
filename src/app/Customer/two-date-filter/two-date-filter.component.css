@@ -1,0 +1,39 @@
+.custom-date-input {
+    width: 200px; /* Adjust the width as needed */
+  }
+  
+  .custom-account-input {
+    width: 200px; /* Adjust the width as needed */
+  }
+  /* Hover over functionality with orange color */
+.table-hover tbody tr:hover {
+    background-color: #FFA500;
+  }
+  
+  /* Header background color */
+  .table thead th {
+    background-color:rgb(10, 10, 107); /* Dark color */
+    color: #ffffff; /* White text */
+  }
+  
+  /* Alternating row colors */
+  .table-striped tbody tr:nth-of-type(odd) {
+    background-color: #f8f9fa; /* Light color */
+  }
+  
+  /* Default row color */
+  .table-striped tbody tr:nth-of-type(even) {
+    background-color: #ffffff; /* White color */
+  }
+  /* Add border to the table */
+.table {
+    border: 1px solid #dee2e6; /* Adjust the color as needed */
+  }
+  
+  /* Add border to table cells */
+  .table th,
+  .table td {
+    border: 1px solid #dee2e6; /* Adjust the color as needed */
+  }
+  
+  

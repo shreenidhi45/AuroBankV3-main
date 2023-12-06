@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>AURO-BANK</title>
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    />
+    <style>
+      body {
+        background-color: white;
+        color: black;
+        /* background-image: url("assets/background1.jpg"); Set the path to your background image */
+        background-size: cover;
+        background-repeat: no-repeat;
+        height: 300%;
+      }
+
+      
+
+    /* Position the image */
+    img.card-image {
+        position: absolute;
+        top: 50%;
+        right: 30%;
+        transform: translateY(-50%);
+      }
+
+      .navbar {
+        background-color: black;
+        width: 200%;
+        height: 150%;
+      }
+
+      .navbar-brand,
+      .navbar-nav .nav-link {
+        color: orange;
+      }
+
+      .navbar-brand:hover,
+      .navbar-nav .nav-link:hover {
+        color: black;
+      }
+
+      .nav-item {
+        margin-right: 15px;
+      }
+
+      .nav-link {
+        padding: 15px 20px; /* Adjust the padding as needed */
+        border-radius: 10px;
+        background-color: orange;
+        color: white;
+        font-weight: bold;
+        transition: background-color 0.3s ease, color 0.3s ease;
+        text-align: center; /* Center the text within the button */
+        display: inline-block; /* Make sure the buttons have uniform width */
+      }
+
+      .nav-link:hover {
+        background-color: white;
+        color: orange;
+      }
+
+      .nav-item.dropdown:hover .dropdown-menu {
+        display: block;
+      }
+
+      .dropdown-menu {
+        background-color: orange;
+        color: white;
+        border-radius: 10px;
+        display: none;
+      }
+
+      .dropdown-item {
+        color: white;
+        font-weight: bold;
+      }
+
+      .dropdown-item:hover {
+        background-color: white;
+        color: orange;
+      }
+    </style>
+  </head>
+
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-dark">
+      <a class="navbar-brand" href="">AURION-BANK </a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbarNav"
+        aria-controls="navbarNav"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+          <!-- Add your navigation links here -->
+
+          <li class="nav-item active">
+            <a class="nav-link" routerLink="/customer" (click)="viewdashboard()">Customer dashboard</a>
+          </li>
+          <li class="nav-item active">
+            <a class="nav-link" (click)="viewPassbook()">Passbook</a>
+          </li>
+          <li class="nav-item active">
+            <a class="nav-link" (click)="viewAccountStatement()"
+              >MINI STATEMENT
+            </a>
+          </li>
+          <li class="nav-item active">
+            <a class="nav-link" (click)="showAccountCreateFun()"
+              >Register Customer</a
+            >
+          </li>
+          <li class="nav-item active">
+            <a class="nav-link" (click)="showTransactionFun()">Transaction</a>
+          </li>
+          <li class="nav-item dropdown active">
+            <a class="nav-link dropdown-toggle" href="#" id="accountDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Account
+            </a>
+            <div class="dropdown-menu" aria-labelledby="accountDropdown">
+              <a class="dropdown-item" (click)="showAccountRequestFun()">Request Account</a>
+              <a class="dropdown-item" (click)="showDocumentFun()">Upload Documents</a>
+            </div>
+          </li>
+          
+          <li class="nav-item dropdown active">
+            <a class="nav-link dropdown-toggle" href="#" id="queryDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Query
+            </a>
+            <div class="dropdown-menu" aria-labelledby="queryDropdown">
+              <a class="dropdown-item" (click)="viewQueryForm()">Ask Query</a>
+              <a class="dropdown-item" (click)="queyFunShow()">Reply</a>
+            </div>
+          </li>
+          <li class="nav-item dropdown active">
+            <a class="nav-link dropdown-toggle" href="#" id="fdDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Fixed Deposit
+            </a>
+            <div class="dropdown-menu" aria-labelledby="fdDropdown">
+              <a class="dropdown-item" (click)="fdcalculator()">Calculator</a>
+              <a class="dropdown-item" (click)="fixedDeposit()">Deposit</a>
+            </div>
+          </li>
+          <!-- <li class="nav-item active">
+            <a class="nav-link" (click)="viewFDPassbook()">LogOut</a>
+          </li> -->
+
+          <!-- Add other navigation links as needed -->
+        </ul>
+      </div>
+    </nav>
+
+    <div class="container">
+      <main style="margin-top: 58px;">
+        <!-- Add your main content from code1 here -->
+        <!-- ... -->
+        
+        <!-- Passbook component -->
+        <div *ngIf="showPassbook">
+          <app-customer-passbook></app-customer-passbook>
+        </div>
+
+        <!-- Account request component -->
+        <div *ngIf="showAccountForm">
+          <app-request-account></app-request-account>
+        </div>
+
+        <!-- Account statement component -->
+        <div *ngIf="showAccountStatment">
+          <app-account-statement></app-account-statement>
+        </div>
+
+        <!-- Document upload component -->
+        <div *ngIf="showDocument">
+          <app-customer-document></app-customer-document>
+        </div>
+
+        <!-- Register customer component -->
+        <div *ngIf="showAccountCreate">
+          <app-customer-register></app-customer-register>
+        </div>
+
+        <!-- Customer query component -->
+        <div *ngIf="showQuery">
+          <app-customer-query></app-customer-query>
+        </div>
+
+        <!-- Transaction component -->
+        <div *ngIf="showTransaction">
+          <app-customert-transaction></app-customert-transaction>
+        </div>
+
+        <!-- Add other components as needed -->
+
+        <!-- <h4 *ngIf="showWarrning">Create Customer Details to Request Account</h4> -->
+
+        <div *ngIf="showQueryTab">
+          <app-view-query></app-view-query>
+        </div>
+        <div *ngIf="showCalculator">
+          <app-fd-calculator></app-fd-calculator>
+        </div>
+        <div *ngIf="showBalance">
+          <app-customer-balance></app-customer-balance>
+                </div>
+      
+                <div *ngIf="showFixedDeposit">
+                  <app-fixed-deposit></app-fixed-deposit>
+                </div>
+      
+                <div *ngIf="showFDPassbook">
+                  <app-customer-fd-passbook></app-customer-fd-passbook>
+                </div>
+      </main>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+  </body>
+</html>
+<br><br><br><br> 
+<div class="container mt-7" *ngIf="dashboard">
+  
+  <div class="card text-center">
+    <img src="https://th.bing.com/th/id/R.6b0022312d41080436c52da571d5c697?rik=ejx13G9ZroRrcg&riu=http%3a%2f%2fpluspng.com%2fimg-png%2fuser-png-icon-young-user-icon-2400.png&ehk=NNF6zZUBr0n5i%2fx0Bh3AMRDRDrzslPXB0ANabkkPyv0%3d&risl=&pid=ImgRaw&r=0" class="card-img-top rounded-circle mx-auto mt-3" alt="Customer Photo" style="width: 100px; height: 100px; object-fit: cover;">
+    <div class="card-body">
+     
+      <h5 class="card-title"> Name:{{customerDataStore.firstName}}&nbsp;{{customerDataStore.lastName}}</h5>
+      <h5 class="card-title">Email:{{customerDataStore.email}}</h5>
+      <h5 class="card-title">Status:{{customerDataStore.isActive}}</h5>
+     
+    </div>
+  </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document Upload</title>
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    />
+    <style>
+      .container {
+        margin-top: 50px;
+      }
+
+      h2 {
+        color: #007bff;
+      }
+
+      label {
+        font-weight: bold;
+      }
+
+      .mb-3 {
+        margin-bottom: 15px;
+      }
+
+      .text-danger {
+        color: #dc3545;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div>
+      <div>
+        <div>
+          <form [formGroup]="customerDocumentForm" (ngSubmit)="submitData()">
+            <h1
+              class="my-4 display-4 fw-bold ls-tight"
+              style="font-size: 2rem;"
+            >
+              "Upload Necessary Documents for <br />
+              <span class="text-primary" style="font-size: 3rem;"
+                >banking related purposes" </span
+              >
+            </h1>
+
+            <!-- Document Type -->
+            <div class="mb-3">
+              <label for="documentType" class="form-label"
+                >Document Type:</label
+              >
+              <select class="form-select" formControlName="DocumentType">
+                <option value="">Select Document Type</option>
+                <option value="passport">PAN CARD</option>
+                <option value="idCard">AADHAR CARD </option>
+              </select>
+              <div
+                *ngIf="TypeValidator && TypeValidator.invalid && TypeValidator.touched"
+                class="text-danger"
+              >
+                Document type is required.
+              </div>
+            </div>
+
+            <!-- Document File -->
+            <div class="mb-3">
+              <label for="documentFile" class="form-label">Choose File:</label>
+              <input type="file" (change)="onFileChange($event)" />
+              <div
+                *ngIf="FileValidator && FileValidator.invalid && FileValidator.touched"
+                class="text-danger"
+              >
+                File upload is required.
+              </div>
+            </div>
+
+            <!-- Customer ID -->
+            <div class="mb-3">
+              <label for="customerId" class="form-label">Customer ID:</label>
+              <input type="number" formControlName="customerId" placeholder="{{cutomerId}}"
+             class="form-control" [(ngModel)]="cutomerId" readonly />
+              <div *ngIf="customerValidator && customerValidator.invalid && customerValidator.touched" class="text-danger">
+                Customer ID is required.
+              </div>
+            </div>
+    
+            <!-- Submit Button -->
+            <button type="submit" class="btn btn-primary" [disabled]="customerDocumentForm.invalid">Upload Document</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

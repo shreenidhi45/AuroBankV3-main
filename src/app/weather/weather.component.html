@@ -1,0 +1,23 @@
+
+<div *ngIf="showError">
+    <strong style="background-color: tomato;color: yellow;">
+    NotAllowed: ! ! ! {{errorMessage}}
+    </strong>
+</div>
+
+<div *ngIf="showData">
+    <h1>Welcome weather information</h1>
+
+    <table border="1" style="background-color: chartreuse;">
+        <tr *ngFor="let item of weatherData">
+
+            <td>{{item.date}}</td>
+            <td>{{item.temperatureC}}</td>
+            <td>{{item.temperatureF}}</td>
+            <td>{{item.summary}}</td>
+
+        </tr>
+    </table>
+
+</div>
+

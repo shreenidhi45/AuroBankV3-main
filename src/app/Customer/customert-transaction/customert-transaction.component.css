@@ -1,0 +1,9 @@
+
+.card:hover {
+  border: 2px solid #007bff; /* Apply border style on hover */
+  cursor: pointer; /* Change cursor on hover */
+}
+.orange-heading {
+  color: orange;
+  font-weight: bold;
+}

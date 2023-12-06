@@ -1,0 +1,106 @@
+<h1 class="my-4 display-4 fw-bold ls-tight" style="font-size: 2rem;">
+  " Unlock the Power of Possibilities: <br />
+  <span class="text-primary" style="font-size: 3rem;">
+    Complete Your Customer Registration Now!!"</span
+  >
+</h1>
+
+<section>
+  <form
+    [formGroup]="customerRegisterForm"
+    (ngSubmit)="submitData(customerRegisterForm.value)"
+  >
+    <div class="row mb-3">
+      <div class="col-md-6">
+        <label for="firstName" class="form-label">First Name *</label>
+        <input
+          type="text"
+          id="firstName"
+          class="form-control"
+          formControlName="firstName"
+        />
+        <span
+          *ngIf="customerRegisterForm.get('firstName')?.invalid && customerRegisterForm.get('firstName')?.touched"
+          class="text-danger"
+          >First Name is required *</span
+        >
+      </div>
+
+      <div class="col-md-6">
+        <label for="lastName" class="form-label">Last Name *</label>
+        <input
+          type="text"
+          id="lastName"
+          class="form-control"
+          formControlName="lastName"
+        />
+        <span
+          *ngIf="customerRegisterForm.get('lastName')?.invalid && customerRegisterForm.get('lastName')?.touched"
+          class="text-danger"
+          >Last Name is required *</span
+        >
+      </div>
+    </div>
+
+    <div class="row mb-3">
+      <div class="col-md-6">
+        <label for="gender" class="form-label">Select Gender *</label>
+        <select class="form-select" formControlName="gender" style="width: 300px">
+          <option value="">Choose Gender</option>
+          <option value="Male">Male</option>
+          <option value="Female">Female</option>
+          <option value="Other">Other</option>
+        </select>
+        <span
+          *ngIf="customerRegisterForm.get('gender')?.invalid && customerRegisterForm.get('gender')?.touched"
+          class="text-danger"
+          >Gender is required *</span
+        >
+      </div>
+
+      <div class="col-md-6">
+        <label for="DOB" class="form-label">Date of Birth *</label>
+        <input type="date" class="form-control" formControlName="DOB" />
+        <span
+          *ngIf="customerRegisterForm.get('DOB')?.invalid && customerRegisterForm.get('DOB')?.touched"
+          class="text-danger"
+          >Date of Birth is required *</span
+        >
+      </div>
+    </div>
+
+    <div class="row mb-3">
+      <div class="col-md-6">
+        <label for="email" class="form-label">Email ID *</label>
+        <input type="email" class="form-control" formControlName="email" />
+        <span
+          *ngIf="customerRegisterForm.get('email')?.invalid && customerRegisterForm.get('email')?.touched"
+          class="text-danger"
+          >Email is required *</span
+        >
+      </div>
+
+      <div class="col-md-6">
+        <label for="userId" class="form-label">User ID</label>
+        <input
+          type="number"
+          class="form-control"
+          placeholder="{{ userId }}"
+          formControlName="userId"
+          [(ngModel)]="userId"
+          readonly
+        />
+      </div>
+    </div>
+<br>
+    <div class="text-center mt-3">
+      <button
+        type="submit"
+        class="btn btn-primary"
+        [disabled]="customerRegisterForm.invalid"
+      >
+        Register
+      </button>
+    </div>
+  </form>
+</section>

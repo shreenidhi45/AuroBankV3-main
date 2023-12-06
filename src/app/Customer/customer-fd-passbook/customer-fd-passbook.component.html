@@ -1,0 +1,148 @@
+<div>
+    <form [formGroup]="accountForm" (ngSubmit)="onSubmit(accountForm.value)" class="col-md-6 mx-auto">
+      <div class="form-group">
+        <label for="accountType">Select Account Number:</label>
+        <select formControlName="accountType" class="form-control account-select">
+          
+          <option *ngFor="let item of accountStorage" [value]="item.accountNumber">{{ item.accountNumber }}</option>
+        </select>
+        <div *ngIf="accountTypeValidator && accountTypeValidator.invalid && accountTypeValidator.touched" class="text-danger">
+          Account type is required.
+        </div>
+      </div> 
+      <button type="submit" class="btn btn-primary" [disabled]="accountForm.invalid">Submit</button>
+    </form>
+    </div> 
+     
+    
+           
+          <div *ngIf="createAccount">
+            <ngb-alert>
+              <h1>Create Account to view Passbook</h1>
+              <button (click)="refreshFun()">Clear</button>
+            </ngb-alert>
+          </div>
+          
+         
+        <div *ngIf="resultcondition">
+            <div class="container mt-4">
+                <h2>Account Information</h2>
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th>Account Number</th>
+                      <th>Account Type</th>
+                      <th>Opening Date</th>
+                      <th>Account Balance</th>                   
+                     </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngIf="accounts">
+                        <td>{{ accounts.accountNumber }}</td>
+                        <td>{{ accounts.accountType }}</td>
+                        <td>{{ accounts.openningDate | date:'short' }}</td>
+                        <td>{{ accounts.accountBalance | currency:'INR' }}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              
+              <div class="container mt-4">
+                <h2>Transaction Details</h2>
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th>Fd Account ID</th>
+                      <th>Sender Account</th>
+                      
+                      <th>Opening Date</th>
+                      <th> Amount</th>
+                      <th>Duration (in days)</th>
+                      <th>ROI</th>
+                      <th>Maturity Date</th>
+                      <th>Maturity Amount</th>
+                      <th>Interest Returns</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <!-- <ng-container *ngFor="let account of accounts"> -->
+                      <tr *ngFor="let fdAccount of accounts.fdAccounts">
+                        <td>{{ fdAccount.fdAccountId }}</td>
+                        <td>{{ fdAccount.accountId }}</td>
+                        
+                        <td>{{ fdAccount.openingDate }}</td>
+                        <td>{{ fdAccount.amount |  currency:'INR' }}</td>
+                        <td>{{ fdAccount.duration }}</td>
+                        <td>{{ fdAccount.roi }}</td>
+                        <td>{{ fdAccount.maturityDate | date:'short' }}</td>
+                        <td>{{ fdAccount.maturityAmount }}</td>
+                        <td>{{ fdAccount.interestReturns }}</td>
+                      </tr>
+                    <!-- </ng-container> -->
+                  </tbody>
+                </table>
+              </div>
+              
+        </div>
+        
+    
+
+
+     
+        <!-- <div class="container mt-4">
+            <h2>Account Information</h2>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Account Number</th>
+                        <th>Account Type</th>
+                        <th>Opening Date</th>
+                        <th>Account Balance</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngIf="accounts">
+                        <td>{{ accounts.accountNumber }}</td>
+                        <td>{{ accounts.accountType }}</td>
+                        <td>{{ accounts.openningDate | date:'short' }}</td>
+                        <td>{{ accounts.accountBalance | currency:'INR' }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <div class="container mt-4">
+            <h2>FD Account Details</h2>
+            <div *ngFor="let account of accounts">
+                <table class="table" *ngIf="account.fdAccounts">
+                    <thead>
+                        <tr>
+                            <th>Fd Account ID</th>
+                            <th>Sender Account</th>
+                            <th>Opening Date</th>
+                            <th>Amount</th>
+                            <th>Duration</th>
+                            <th>ROI</th>
+                            <th>Maturity Date</th>
+                            <th>Maturity Amount</th>
+                            <th>Interest Returns</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let fdAccount of account.fdAccounts">
+                            <td>{{ fdAccount.fdAccountId }}</td>
+                            <td>{{ fdAccount.accountId }}</td>
+                            <td>{{ fdAccount.openingDate | date:'short' }}</td>
+                            <td>{{ fdAccount.amount | currency:'INR' }}</td>
+                            <td>{{ fdAccount.duration }}</td>
+                            <td>{{ fdAccount.roi }}</td>
+                            <td>{{ fdAccount.maturityDate | date:'short' }}</td>
+                            <td>{{ fdAccount.maturityAmount }}</td>
+                            <td>{{ fdAccount.interestReturns }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    
+     -->

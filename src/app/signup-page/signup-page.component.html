@@ -1,0 +1,183 @@
+<div class="overlay" *ngIf="showErrorMessage">
+  <div class="popup-container">
+    <ngb-alert class="error-alert">Username Already Exists</ngb-alert>
+    <button (click)="RefreshDighnUp()" class="btn btn-primary">
+      Try Again
+    </button>
+  </div>
+</div>
+
+<!-- Section: Design Block -->
+<section class="design-section" style="background-color: #eee;">
+  <!-- Jumbotron -->
+  <div class="jumbotron px-4 py-5 px-md-5 text-center text-lg-start">
+    <div class="container">
+      <div class="row gx-lg-5 align-items-center">
+        <div class="col-lg-6 mb-5 mb-lg-0">
+          <div class="text-center">
+            <!-- Use the extracted icon URL here -->
+            <img
+              src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/lotus.webp"
+              style="width: 185px;"
+              alt="logo"
+            />
+          </div>
+          <h1 class="my-5 display-3 fw-bold ls-tight">
+            Join Us Today for a<br />
+            <span class="text-primary">Futuristic Financial Journey!</span>
+          </h1>
+        </div>
+
+        <div class="col-lg-6 mb-5 mb-lg-0">
+          <div class="card">
+            <div class="card-body py-5 px-md-5">
+              <form
+                [formGroup]="registerForm"
+                (ngSubmit)="submitData(registerForm.value)"
+                novalidate
+              >
+                <!-- User Name Input -->
+                <div class="form-outline mb-3">
+                  <span
+                    *ngIf="userValidator?.invalid && userValidator?.touched"
+                    style="color: red;"
+                    >required UserName</span
+                  >
+                  <input
+                    type="text"
+                    class="form-control smaller-width"
+                    formControlName="UserName"
+                    placeholder="Enter User Name..."
+                  />
+                  <label class="form-label" for="form3Example3"
+                    >User Name</label
+                  >
+                </div>
+
+                <!-- Email Input -->
+                <div class="form-outline mb-3">
+                  <span
+                    *ngIf="emailValidator?.invalid && emailValidator?.touched"
+                    style="color: red;"
+                    >required Email</span
+                  >
+                  <input
+                    type="email"
+                    class="form-control smaller-width"
+                    formControlName="email"
+                    placeholder="Enter Email Address"
+                  />
+                  <label class="form-label" for="form3Example3"
+                    >Email address</label
+                  >
+                </div>
+
+                <!-- Password Input -->
+                <div class="form-outline mb-3">
+                  <span
+                    *ngIf="passwordValidator?.invalid && passwordValidator?.touched"
+                    style="color: red;"
+                    >required Password</span
+                  >
+                  <input
+                    type="password"
+                    class="form-control smaller-width"
+                    formControlName="Password"
+                    placeholder="Enter Your Password..."
+                  />
+                  <label class="form-label" for="form3Example4">Password</label>
+                  <span
+                    *ngIf="passwordValidator?.invalid && passwordValidator?.touched"
+                    style="color: red;"
+                    >Minimum 6 characters</span
+                  >
+                </div>
+
+                <!-- Confirm Password Input -->
+                <div class="form-outline mb-3">
+                  <span
+                    *ngIf="confirmValidator?.invalid && confirmValidator?.touched"
+                    style="color: red;"
+                    >required Password</span
+                  >
+                  <input
+                    type="password"
+                    class="form-control smaller-width"
+                    formControlName="ConfirmPassword"
+                    placeholder="Re-enter Your Password"
+                  />
+                  <label class="form-label" for="form3Example4"
+                    >Confirm Password</label
+                  >
+                  <span
+                    *ngIf="registerForm.errors?.['PasswordMatchError'] && confirmValidator?.touched"
+                    style="color: red;"
+                    >: password should match</span
+                  >
+                </div>
+
+                <!-- Role ID Input -->
+                <div class="form-outline mb-4">
+                  <span
+                    *ngIf="roleValidator && roleValidator.invalid && roleValidator.touched"
+                    style="color: red;"
+                    >required Role Id</span
+                  >
+                  <input
+                    type="number"
+                    class="form-control"
+                    placeholder="Enter Your Role Id"
+                    formControlName="roleId"
+                    hidden
+                  />
+                  <label class="form-label" for="form3Example3" hidden
+                    >Role Id</label
+                  >
+                </div>
+
+                <!-- Checkbox -->
+                <div class="form-check d-flex justify-content-center mb-3">
+                  <input
+                    class="form-check-input me-2"
+                    type="checkbox"
+                    value=""
+                    id="form2Example33"
+                    checked
+                  />
+                  <label class="form-check-label" for="form2Example33"
+                    >Subscribe to our newsletter</label
+                  >
+                </div>
+
+                <!-- Submit button -->
+                <button
+                  type="submit"
+                  class="btn btn-primary btn-block mb-3"
+                  [disabled]="registerForm.invalid"
+                >
+                  Sign up
+                </button>
+                <br />
+                <br />
+                <a href="#!" class="link-danger" routerLink=""
+                  >Have An Exsisting Account...?</a
+                >
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Jumbotron -->
+</section>
+<!-- Section: Design Block -->
+
+<div class="overlay" *ngIf="showErrorMessage">
+  <div class="popup-container">
+    <ngb-alert class="error-alert">Username Already Exists</ngb-alert>
+    <button (click)="RefreshDighnUp()" class="btn btn-primary">
+      Try Again
+    </button>
+  </div>
+</div>

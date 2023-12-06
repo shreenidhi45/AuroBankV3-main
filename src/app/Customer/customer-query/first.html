@@ -1,0 +1,63 @@
+<br />
+<br />
+<div class="col-md-6 mx-auto mt-4">
+  <h2 class="text-center">
+    <span style="color: orange; font-weight: bold;">STATE YOUR QUERY....</span>
+  </h2>
+
+  <ngb-alert *ngIf="queryResponce">
+    Query Request Added successfully
+  </ngb-alert>
+
+  <form [formGroup]="QueryForm" (ngSubmit)="onSubmit(QueryForm.value)">
+    <div class="mb-3">
+      <span
+        *ngIf="queryValidator && queryValidator.invalid && queryValidator.touched"
+        style="color: red;"
+      >
+        Enter Your Query
+      </span>
+      <label for="replyMessage" class="form-label">Query Message:</label>
+      <textarea class="form-control" formControlName="queryText"></textarea>
+    </div>
+    <div class="mb-3">
+      <span
+        *ngIf="cutomerIdValidator && cutomerIdValidator.invalid && cutomerIdValidator.touched"
+        style="color: red;"
+      >
+        Required Customer ID
+      </span>
+      <label for="customerId" class="form-label">Customer ID:</label>
+      <input
+        type="number"
+        class="form-control"
+        formControlName="customerId"
+        placeholder="{{customerId}}"
+        [(ngModel)]="customerId"
+        readonly
+      />
+    </div>
+
+    <!-- Submit Button with Professional Details -->
+    <div class="text-center mb-3">
+      <button
+        type="submit"
+        class="btn btn-primary"
+        [disabled]="QueryForm.invalid"
+        style="background-color: orange; color: black; font-weight: bold;"
+        onmouseover="this.style.backgroundColor='black'; this.style.color='orange'"
+        onmouseout="this.style.backgroundColor='orange'; this.style.color='black'"
+      >
+        Submit
+      </button>
+    </div>
+  </form>
+
+
+
+<!-- Professional Details -->
+<p class="text-center" style="font-size: 16px; color: #333;">
+  For More Details, Please Contact Aurion-Bank Pvt Ltd<br />
+  Phone: 1234567890<br />
+  Address: Aurion-Bank Pvt. Ltd., Navi Mumbai
+</p>

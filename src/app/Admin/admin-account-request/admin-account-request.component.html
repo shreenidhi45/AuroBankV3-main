@@ -1,0 +1,89 @@
+<div class="custom-container">
+  <h1 class="my-5 display-3 fw-bold ls-tight text-center">
+    <span class="text-primary" style="font-size: 3rem;">List Of All Account Requests</span>
+  </h1>
+  <h4 class="text-center">
+    (Note: Approval Only after KYC)
+  </h4>
+</div>
+<div class="container mt-4">
+  <div class="row">
+    <div class="col-md-12 text-center">
+   
+    </div>
+  </div>
+  <div class="row">
+    <!-- First column with the table -->
+    <div class="col-md-8">
+      <table class="table table-bordered table-hover">
+        <thead class="thead-light">
+          <tr>
+            <th>Account Number</th>
+            <th>Account Type</th>
+            <th>Request Date</th>
+            <th>Account Balance</th>
+            <th>Customer Id</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let account of accounts">
+            <td>{{ account.accountNumber }}</td>
+            <td>{{ account.accountType }}</td>
+            <td>{{ account.openningDate | date: 'yyyy-MM-dd' }}</td>
+            <td>{{ account.accountBalance }}</td>
+            <td>{{ account.customerId }}</td>
+            <td>
+              <button
+                *ngIf="!account.isActive"
+                class="btn btn-primary"
+                (click)="acceptAccount(account)"
+              >
+                Accept
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="col-md-4">
+      <h5>search customer id to view  customer uploaded document</h5>
+      <form [formGroup]="searchForm" class="mb-4 mt-4" (ngSubmit)="onSubmit(searchForm.value)">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search by Customer ID" formControlName="documentId" />
+          <button class="btn btn-outline-secondary" type="submit">Search</button>
+        </div>
+      </form>
+      <!-- Additional content related to search, if needed... -->
+    </div>
+  </div>
+</div>
+
+<div *ngIf="documents&& imageSource">
+  <!-- ... Your existing code ... -->
+  <h3>Image for Customer ID {{ searchCustomerId }}</h3>
+  <img *ngIf="imageSource" [src]="imageSource" alt="Document Image" />
+</div>
+
+<!-- document-details.component.html -->
+
+<!-- document-details.component.html -->
+<!-- <div *ngIf="imageSource">
+<img [src]="imageSource" alt="Document Image" />
+</div> -->
+
+<!-- your-component.component.html    (click)="openImageModal()"  --> 
+<div *ngIf="imageSource" class="card">
+<div class="card-header  ">
+  <h5 class="card-title">Document Image</h5> 
+  <button class="btn btn-close justify-content-end" (click)="close()"></button>
+</div>
+<div class="card-body">
+  <img [src]="imageSource" alt="Document Image" class="card-img-top">
+</div>
+</div>
+
+<div *ngIf="showCustomerNotUploaded">
+<ngb-alert>Customer Not Uploaded Any Documents</ngb-alert>
+
+</div>

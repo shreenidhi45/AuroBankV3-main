@@ -1,0 +1,23 @@
+:host {
+    /* Set background image */
+    background-image: url("./assets/bgimage.jpg");
+  
+    /* Set background size to cover the entire viewport */
+    background-size: cover;
+  
+    /* Center the background image */
+    background-position: center;
+  
+    /* Fix the background image while scrolling */
+    background-attachment: fixed;
+  
+    /* Add a fallback background color */
+    background-color: #f0f0f0;
+  
+    /* Set other styles as needed */
+    display: block;
+    margin: 0;
+    padding: 0;
+    font-family: 'Arial', sans-serif;
+    /* Add more styles as needed */
+  }

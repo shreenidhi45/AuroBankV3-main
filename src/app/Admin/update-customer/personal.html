@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Your Angular Project</title>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+    <style>
+      body {
+        background-color: #f8f9fa;
+      }
+
+      .container-fluid {
+        margin-top: 30px;
+      }
+
+      .form-container {
+        background-color: #ffffff;
+        padding: 20px;
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      }
+
+      .table-container {
+        background-color: #ffffff;
+        padding: 20px;
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      }
+
+      h2 {
+        color: #ff8c00;
+      }
+
+      th,
+      .table-row {
+        background-color: #ff8c00;
+        color: #ffffff;
+      }
+
+      .table-hover:hover {
+        background-color: #ffebcd;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container-fluid">
+      <div class="row">
+        <!-- Left side - Form -->
+        <div class="col-md-6">
+          <div class="form-container">
+            <h2>Select Customer</h2>
+            <form
+              [formGroup]="customerRegisterForm"
+              (ngSubmit)="submitData(customerRegisterForm.value)"
+            >
+              <div class="form-group">
+               
+                <label for="customerId">User ID</label>
+                <input
+                  type="number"
+                  class="form-control"
+                  formControlName="customerId"
+                  [(ngModel)]="fetchSingleData.customerId"
+                  id="customerId"
+                  placeholder="User ID"
+                />
+              </div>
+
+              <div class="form-group">
+                <label for="firstName">First Name</label>
+             
+                <input
+                  type="text"
+                  class="form-control"
+                  id="firstName"
+                  placeholder="First Name"
+                  formControlName="firstName"
+                [(ngModel)]="fetchSingleData.firstName"
+                />
+              </div>
+
+
+              <div class="form-group">
+                <label for="lastName">Last Name</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="lastName"
+                  placeholder="Last Name"
+                  formControlName="lastName"
+                 [(ngModel)]="fetchSingleData.lastName"
+                />
+              </div>
+              <div class="form-group">
+                <label for="email">Email ID</label>
+                <input
+                  type="email"
+                  class="form-control"
+                  id="email"
+                  placeholder="Email ID"
+                  formControlName="email"
+                  [(ngModel)]="fetchSingleData.email"
+                />
+              </div>
+            <button
+               type="submit"
+                class="btn btn-warning">
+                [disabled]="customerRegisterForm.invalid"
+                Submit
+            </button>
+            </form>
+          </div>
+        </div>
+
+    <!-- Right side - Table -->
+<div class="col-md-6">
+    <div class="table-container">
+      <table class="table table-hover table-bordered">
+        <thead class="thead-dark">
+          <tr>
+            <th style="width: 150px;">Customer ID</th>
+            <th style="width: 150px;">First Name</th>
+            <th style="width: 150px;">Last Name</th>
+            <th style="width: 200px;">Email</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of dataStore" class="table-row">
+            <td>{{ item.customerId }}</td>
+            <td>{{ item.firstName }}</td>
+            <td>{{ item.lastName }}</td>
+            <td>{{ item.email }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.7/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  </body>
+</html>

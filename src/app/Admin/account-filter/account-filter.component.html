@@ -1,0 +1,68 @@
+<div class="col-md-4 d-flex align-items-start">
+  <input
+    type="number"
+    [(ngModel)]="FilterData"
+    class="form-control"
+    placeholder="Enter AccountNumber Filter transaction  "
+  />
+  <button (click)="FilterAccount()" class="btn btn-success">Search</button>
+</div>
+
+<div *ngIf="resultcondition">
+  <div class="container mt-4">
+    <h2>Account Information</h2>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Account Number</th>
+          <th>Account Type</th>
+          <th>Opening Date</th>
+          <th>Account Balance</th>
+          <th>Customer Name</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let account of accounts">
+          <td>{{ account.accountNumber }}</td>
+          <td>{{ account.accountType }}</td>
+          <td>{{ account.openningDate | date:'short' }}</td>
+          <td>{{ account.accountBalance | currency:'INR' }}</td>
+          <td>
+            {{ account.customer.firstName }} {{ account.customer.lastName }}
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="container mt-4">
+    <h2>Transaction Details</h2>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Transaction ID</th>
+          <th>Transaction Type</th>
+          <th>Transaction Amount</th>
+          <th>Description</th>
+          <th>Transaction Date</th>
+          <th>State</th>
+        </tr>
+      </thead>
+      <tbody>
+        <ng-container *ngFor="let account of accounts">
+          <tr *ngFor="let transaction of account.transactions">
+            <td>{{ transaction.transactionId }}</td>
+            <td>{{ transaction.transactionType }}</td>
+            <td>{{ transaction.transactionAmount | currency:'INR' }}</td>
+            <td>{{ transaction.description }}</td>
+            <td>{{ transaction.transactionDate | date:'short' }}</td>
+            <td>{{ transaction.state }}</td>
+          </tr>
+        </ng-container>
+      </tbody>
+    </table>
+
+    
+  </div>
+</div>
+

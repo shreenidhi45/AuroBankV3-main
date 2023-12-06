@@ -1,0 +1,45 @@
+<!-- Your component's HTML template -->
+<form [formGroup]="customerIdForm" (ngSubmit)="showQuery(customerIdForm.value)">
+  <div class="form-group">
+    <label for="customerId">Customer ID:</label>
+    <input type="number"  formControlName="customerId" class="form-control">
+    <span *ngIf="qValidator && qValidator.invalid && qValidator.touched"
+    style="color: red;"
+    >required customerId</span>
+  </div>
+
+  <button type="submit" class="btn btn-primary" [disabled]="customerIdForm.invalid">Submit</button>
+</form>
+
+<div class="container mt-4" *ngIf="tableShow">
+  <h2>Queries</h2>
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>Query ID</th>
+        <th>Query Text</th>
+        <th>Reply</th>
+        <!-- <th>Reply Date</th> -->
+        <th>Customer ID</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let query of queries">
+        <td>{{ query.queryId }}</td>
+        <td>{{ query.queryText }}</td>
+        <!-- <td>{{ query.replyQuery }}</td> -->
+        <td>{{ query.queryDate | date: 'yyyy-MM-dd HH:mm:ss' }}</td>
+        <td>{{ query.customerId }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div *ngIf="queryNotFound" class="modal-overlay">
+  <div class="modal-dialog">
+    <ngb-alert class="bg-danger">
+      <h1 class="text-white">Sorry, Account Not Found</h1>
+      <button class="btn btn-success" (click)="refreshfun()">Clear</button>
+    </ngb-alert>
+  </div>
+</div>

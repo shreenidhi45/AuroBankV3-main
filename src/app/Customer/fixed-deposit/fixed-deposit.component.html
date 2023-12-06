@@ -1,0 +1,114 @@
+<div class="form-container">
+    <form [formGroup]="fixedDepositForm" (ngSubmit)="submitData()">
+        <!-- From Account Dropdown -->
+        <div class="form-group">
+          <label for="fromAccount">From Account:</label>
+          <select formControlName="fromAccount" id="fromAccount" class="form-control">
+            <option value="" disabled>Select an Account</option>
+            <option *ngFor="let account of accounts" [value]="account.accountNumber">
+              {{ account.accountNumber }} - {{ account.accountType }} (Balance: ₹{{ account.accountBalance }})
+            </option>
+          </select>
+        </div>
+      
+    <!-- Amount Input Field -->
+    <div class="form-group">
+        <label for="amount">Amount:</label>
+        <input formControlName="amount" type="number" id="amount" class="form-control">
+        <div *ngIf="fixedDepositForm.get('amount')?.invalid && (fixedDepositForm.get('amount')?.dirty || fixedDepositForm.get('amount')?.touched)" class="alert alert-danger">
+          {{ amountError }}
+        </div>
+      </div>
+    
+      <!-- Duration Dropdowns -->
+    <div class="form-group">
+        <label>Duration:</label>
+        <div class="row">
+          <div class="col">
+            <select formControlName="years" class="form-control custom-dropdown">
+                <option value="" disabled selected>Years &#x25BC;</option>
+              <option *ngFor="let year of yearOptions" [value]="year">{{ year }} year(s)</option>
+            </select>
+          </div>
+          <div class="col">
+            <select formControlName="months" class="form-control custom-dropdown">
+                <option value="" disabled selected>Months &#x25BC;</option>
+              <option *ngFor="let month of monthOptions" [value]="month">{{ month }} month(s)</option>
+            </select>
+          </div>
+          <div class="col">
+            <select formControlName="days" class="form-control custom-dropdown">
+                <option value="" disabled selected>Days &#x25BC;</option>
+              <option *ngFor="let day of dayOptions" [value]="day">{{ day }} day(s)</option>
+            </select>
+          </div>
+        </div>
+        <div *ngIf="durationError" class="alert alert-danger">
+            {{ durationError }}
+          </div>
+      </div>
+      
+      
+      <!-- ROI Field -->
+      <div class="form-group">
+        <label for="roi">Rate of Interest (ROI):</label>
+        <input formControlName="roi" type="number" id="roi" class="form-control" readonly>
+      </div>
+      
+      <div class="view-interest-rates">
+        <a (click)="openInterestRatesModal(interestRatesModal)">View Interest Rates</a>
+      </div>
+      
+      
+      <!-- Interest Rates Modal Content -->
+      <ng-template #interestRatesModal>
+        <div class="modal-header">
+          <h5 class="modal-title">FD Interest Rates</h5>
+          <button type="button" class="close" aria-label="Close" (click)="modalService.dismissAll()">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">Duration (days)</th>
+                <th scope="col">ROI (%)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let rate of interestRates">
+                <td>{{ rate.duration.min }} - {{ rate.duration.max }}</td>
+                <td>{{ rate.roi }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </ng-template>
+      
+    
+      <!-- Maturity Date -->
+    <div class="form-group">
+        <label>Maturity Date:</label>
+        <input type="text" class="form-control" [value]="getDisplayMaturityDate()" readonly>
+      </div>
+      
+      <!-- Maturity Amount -->
+      <div class="form-group">
+        <label>Maturity Amount:</label>
+        <input type="text" class="form-control" [value]="calculateMaturityAmount() | number:'1.2-2'" readonly>
+      </div>
+      
+      <!-- Interest Returns -->
+      <div class="form-group">
+        <label>Interest Returns:</label>
+        <input type="text" class="form-control" [value]="calculateInterestReturns() | number:'1.2-2'" readonly>
+      </div>
+    
+      
+        <!-- Submit Button -->
+        <button type="submit" class="btn btn-primary" [disabled]="fixedDepositForm.invalid || fixedDepositForm.errors?.['durationExceeds']">Create FD</button>
+    </form>
+      
+
+</div>

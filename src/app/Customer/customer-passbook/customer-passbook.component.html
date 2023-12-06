@@ -1,0 +1,121 @@
+<!-- Include Bootstrap CSS file -->
+<link
+  rel="stylesheet"
+  href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+/>
+
+<style>
+  /* Custom styling for orange and white theme */
+  .orange-bg {
+    background-color: #ffa500; /* Orange color */
+    color: #fff; /* White text */
+  }
+</style>
+
+<div>
+  <h1 class="my-4 display-4 fw-bold ls-tight" style="font-size: 3rem;">
+    " Passbook Portraits: <br />
+    <span class="text-primary" style="font-size: 3rem;"
+      >Where Every Transaction Tells a Tale"</span
+    >
+  </h1>
+  <br />
+  <form
+    [formGroup]="accountForm"
+    (ngSubmit)="onSubmit(accountForm.value)"
+    class="col-md-6 mx-auto"
+  >
+    <div class="form-group">
+      <label for="accountType">Select Account Number:</label>
+      <select formControlName="accountType" class="form-control account-select">
+        <option value="" disabled selected hidden>Account Number</option>
+        <option *ngFor="let item of accountStorage" [value]="item.accountNumber"
+          >{{ item.accountNumber }}</option
+        >
+      </select>
+      <div
+        *ngIf="accountTypeValidator && accountTypeValidator.invalid && accountTypeValidator.touched"
+        class="text-danger"
+      >
+        Account type is required.
+      </div>
+    </div>
+
+    <button
+      type="submit"
+      class="btn btn-primary"
+      [disabled]="accountForm.invalid"
+    >
+      Submit
+    </button>
+  </form>
+</div>
+
+<div *ngIf="createAccount">
+  <ngb-alert>
+    <h1>Create Account to view Passbook</h1>
+    <button (click)="refreshFun()">Clear</button>
+  </ngb-alert>
+</div>
+
+<div *ngIf="resultcondition">
+  <div class="container mt-4">
+    <h2>Account Information</h2>
+    <table class="table table-bordered table-hover">
+      <thead class="thead-dark">
+        <tr>
+          <th style="width: 1000px;">Account Number</th>
+          <th style="width: 1000px;">Account Type</th>
+          <th style="width: 1000px;">Opening Date</th>
+          <th style="width: 1000px;">Account Balance</th>
+          <th style="width: 1000px;">Customer Name</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let account of accounts">
+          <td>{{ account.accountNumber }}</td>
+          <td>{{ account.accountType }}</td>
+          <td>{{ account.openningDate | date:'short' }}</td>
+          <td>{{ account.accountBalance | currency:'INR' }}</td>
+          <td>
+            {{ account.customer.firstName }} {{ account.customer.lastName }}
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="container mt-4">
+    <br />
+    <h2>Transaction Details</h2>
+    <table class="table table-bordered table-hover">
+      <thead class="thead-dark">
+        <tr>
+          <th style="width: 1000px;">Transaction ID</th>
+          <th style="width: 1000px;">Transaction Type</th>
+          <th style="width: 1000px;">Recievers Account</th>
+          <th style="width: 1000px;">Transaction Amount</th>
+          <th style="width: 1000px;">Description</th>
+          <th style="width: 1000px;">Transaction Date</th>
+          <th style="width: 1000px;">State</th>
+          
+        </tr>
+      </thead>
+      <tbody>
+        <ng-container *ngFor="let account of accounts">
+          <tr *ngFor="let transaction of account.transactions">
+            <td>{{ transaction.transactionId }}</td>
+            <td>{{ transaction.transactionType }}</td>
+            <td>{{transaction.recieverAccountNumber}}</td>
+            <td>{{ transaction.transactionAmount | currency:'INR' }}</td>
+            <td>{{ transaction.description }}</td>
+            <td>{{ transaction.transactionDate | date:'short' }}</td>
+            <td>{{ transaction.state }}</td>
+          
+          </tr>
+        </ng-container>
+      </tbody>
+    </table>
+  </div>
+</div>
+

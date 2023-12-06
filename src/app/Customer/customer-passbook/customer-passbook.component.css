@@ -1,0 +1,30 @@
+/* Bootstrap Table Styles */
+.table-hover tbody tr:hover {
+    background-color: #FFA500;
+  }
+  
+  .table thead th {
+    background-color: rgb(10, 10, 107);
+    color: #ffffff;
+  }
+  
+  .table-striped tbody tr:nth-of-type(odd) {
+    background-color: #f8f9fa;
+  }
+  
+  .table-striped tbody tr:nth-of-type(even) {
+    background-color: #ffffff;
+  }
+  
+  .table {
+    border: 1px solid #dee2e6;
+  }
+  
+  .table th,
+  .table td {
+    border: 2px solid #dee2e6;
+  }
+  
+  /* Additional Custom Styles */
+  /* Add your custom styles here if needed */
+  
